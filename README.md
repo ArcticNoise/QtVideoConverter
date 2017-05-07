@@ -1,0 +1,2 @@
+# QtVideoConverter
+FFMpeg tool wrapper
