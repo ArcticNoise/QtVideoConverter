@@ -13,10 +13,12 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        dialog.cpp \
-    droppanel.cpp
+    droppanel.cpp \
+    mainwindow.cpp
 
-HEADERS  += dialog.h \
-    droppanel.h
+HEADERS  += \
+    droppanel.h \
+    mainwindow.h
 
-FORMS    += dialog.ui
+FORMS    += \
+    mainwindow.ui
