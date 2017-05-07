@@ -17,6 +17,10 @@ public:
 
 private:
     Ui::MainWindow *ui;
+
+private slots:
+    void onStartTranscoding();
+    void onEndTranscoding();
 };
 
 #endif // MAINWINDOW_H

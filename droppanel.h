@@ -21,6 +21,10 @@ Q_OBJECT
 public:    
     explicit DropPanel(QWidget *parent = 0);
 
+signals:
+    void started();
+    void finished();
+
 protected:
     void dragEnterEvent(QDragEnterEvent* pe);
     void dropEvent(QDropEvent* pe);

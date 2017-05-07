@@ -30,6 +30,8 @@ void DropPanel::dropEvent(QDropEvent* pe)
 {
     clear();
 
+    emit started();
+
     setReadOnly(true);
 
     QList<QUrl> urlList = pe->mimeData()->urls();
@@ -154,5 +156,9 @@ void DropPanel::transcodeNextFile()
         QString path = filesToTranscode.takeFirst();
         encodeVideoFile(&path);
     }
-    else{setReadOnly(false);}
+    else
+    {
+        setReadOnly(false);
+        emit finished();
+    }
 }
