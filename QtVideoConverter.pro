@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui xml
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -14,11 +14,14 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
     droppanel.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    settings.cpp
 
 HEADERS  += \
     droppanel.h \
-    mainwindow.h
+    mainwindow.h \
+    settings.h
 
 FORMS    += \
-    mainwindow.ui
+    mainwindow.ui \
+    settings.ui
