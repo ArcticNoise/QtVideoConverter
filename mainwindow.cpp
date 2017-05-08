@@ -6,6 +6,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);        
+
+    setWindowTitle("Video converter");
+    setWindowIcon(QIcon(":/imgs/LarianLogo.png"));
+
     settings.setWindowModality(Qt::ApplicationModal);
 
     connect(ui->textEdit,SIGNAL(started()),this,SLOT(onStartTranscoding()));
