@@ -22,8 +22,8 @@ private:
 
 private slots:
     void onStartTranscoding();
-    void onEndTranscoding();
-    void on_optionsButton_clicked();
+    void onEndTranscoding();    
+    void on_action_Settings_triggered();
 };
 
 #endif // MAINWINDOW_H

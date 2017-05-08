@@ -27,7 +27,7 @@ void MainWindow::onEndTranscoding()
     ui->progressBar->setRange(0,1);
 }
 
-void MainWindow::on_optionsButton_clicked()
+void MainWindow::on_action_Settings_triggered()
 {
     settings.show();
 }
