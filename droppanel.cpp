@@ -14,6 +14,11 @@ DropPanel::DropPanel(QWidget *parent): QTextEdit(parent)
     connect(mTranscodingProcess, SIGNAL(finished(int)), this, SLOT(encodingFinished()));
 }
 
+void DropPanel::setSound(bool value)
+{
+    withSound = value;
+}
+
 void DropPanel::dragEnterEvent(QDragEnterEvent* pe)
 {
     QList<QUrl> urlList = pe->mimeData()->urls();
@@ -130,7 +135,14 @@ void DropPanel::encodeVideoFile(QString* path)
          }
      }
 
-    arguments << "-i" << input << "-an" << "-crf" << "33" << output;
+    arguments << "-i" << input;
+
+    if(!withSound)
+    {
+        arguments << "-an";
+    }
+
+    arguments << "-crf" << "33" << output;
 
     qDebug() << arguments;
 

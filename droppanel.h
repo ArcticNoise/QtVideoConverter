@@ -21,6 +21,8 @@ Q_OBJECT
 public:    
     explicit DropPanel(QWidget *parent = 0);
 
+    void setSound(bool value);
+
 signals:
     void started();
     void finished();
@@ -44,6 +46,7 @@ private:
     QString convertedFile;
 
     QTextCursor cursor;
+    bool withSound;
 
 private slots:
     void readyReadStandardOutput();

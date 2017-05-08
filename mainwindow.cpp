@@ -14,6 +14,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     connect(ui->textEdit,SIGNAL(started()),this,SLOT(onStartTranscoding()));
     connect(ui->textEdit,SIGNAL(finished()),this,SLOT(onEndTranscoding()));
+
+    ui->textEdit->setSound(false);
 }
 
 MainWindow::~MainWindow()
@@ -34,4 +36,9 @@ void MainWindow::onEndTranscoding()
 void MainWindow::on_action_Settings_triggered()
 {
     settings.show();
+}
+
+void MainWindow::on_action_Sound_toggled(bool arg1)
+{
+    ui->textEdit->setSound(arg1);
 }
