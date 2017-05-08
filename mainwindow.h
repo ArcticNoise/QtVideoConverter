@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "settings.h"
 
 namespace Ui {
 class MainWindow;
@@ -17,10 +18,12 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    Settings settings;
 
 private slots:
     void onStartTranscoding();
     void onEndTranscoding();
+    void on_optionsButton_clicked();
 };
 
 #endif // MAINWINDOW_H
