@@ -16,6 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->textEdit,SIGNAL(finished()),this,SLOT(onEndTranscoding()));
 
     ui->textEdit->setSound(false);
+    ui->textEdit->setSettings(&settings);
 }
 
 MainWindow::~MainWindow()

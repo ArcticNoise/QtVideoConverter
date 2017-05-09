@@ -1,6 +1,8 @@
 #ifndef DROPPANEL_H
 #define DROPPANEL_H
 
+#include "settings.h"
+
 #include <QTextEdit>
 #include <QUrl>
 #include <QDir>
@@ -22,6 +24,7 @@ public:
     explicit DropPanel(QWidget *parent = 0);
 
     void setSound(bool value);
+    void setSettings(Settings* value);
 
 signals:
     void started();
@@ -38,6 +41,8 @@ private:
 
     QList<QString>availableExtensions;
     QList<QString>filesToTranscode;
+
+    Settings *settings;
 
     bool isAvailableExt(QString* ext);
     QProcess *mTranscodingProcess;

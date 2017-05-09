@@ -19,6 +19,11 @@ void DropPanel::setSound(bool value)
     withSound = value;
 }
 
+void DropPanel::setSettings(Settings *value)
+{
+    settings = value;
+}
+
 void DropPanel::dragEnterEvent(QDragEnterEvent* pe)
 {
     QList<QUrl> urlList = pe->mimeData()->urls();
@@ -142,7 +147,13 @@ void DropPanel::encodeVideoFile(QString* path)
         arguments << "-an";
     }
 
-    arguments << "-crf" << "33" << output;
+    arguments << "-crf";
+
+    int compressionValue = settings->getCompressionRate() * 10;
+
+    arguments << QString::number(compressionValue);
+
+    arguments << output;
 
     qDebug() << arguments;
 

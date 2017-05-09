@@ -4,5 +4,6 @@
         <file>imgs/SoundOff.png</file>
         <file>imgs/SoundOn.png</file>
         <file>imgs/Options.png</file>
+        <file>imgs/CompressionJackal.png</file>
     </qresource>
 </RCC>
