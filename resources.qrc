@@ -3,5 +3,6 @@
         <file>imgs/LarianLogo.png</file>
         <file>imgs/SoundOff.png</file>
         <file>imgs/SoundOn.png</file>
+        <file>imgs/Options.png</file>
     </qresource>
 </RCC>
