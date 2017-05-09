@@ -14,11 +14,6 @@ DropPanel::DropPanel(QWidget *parent): QTextEdit(parent)
     connect(mTranscodingProcess, SIGNAL(finished(int)), this, SLOT(encodingFinished()));
 }
 
-void DropPanel::setSound(bool value)
-{
-    withSound = value;
-}
-
 void DropPanel::setSettings(Settings *value)
 {
     settings = value;
@@ -142,16 +137,14 @@ void DropPanel::encodeVideoFile(QString* path)
 
     arguments << "-i" << input;
 
-    if(!withSound)
+    if(settings->getSoundOutput() == 0)
     {
         arguments << "-an";
     }
 
     arguments << "-crf";
 
-    int compressionValue = settings->getCompressionRate() * 10;
-
-    arguments << QString::number(compressionValue);
+    arguments << getCompressionValueString();
 
     arguments << output;
 
@@ -184,4 +177,32 @@ void DropPanel::transcodeNextFile()
         setReadOnly(false);
         emit finished();
     }
+}
+
+QString DropPanel::getCompressionValueString()
+{
+    int tempValue = settings->getCompressionRate();
+    int compressionValue;
+
+    switch (tempValue)
+    {
+    case 1:
+        compressionValue = 20;
+        break;
+    case 2:
+        compressionValue = 30;
+        break;
+    case 3:
+        compressionValue = 33;
+        break;
+    case 4:
+        compressionValue = 40;
+        break;
+
+    default:
+        compressionValue = 10;
+        break;
+    }
+
+    return QString::number(compressionValue);
 }

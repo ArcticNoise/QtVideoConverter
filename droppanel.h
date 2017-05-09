@@ -23,7 +23,6 @@ Q_OBJECT
 public:    
     explicit DropPanel(QWidget *parent = 0);
 
-    void setSound(bool value);
     void setSettings(Settings* value);
 
 signals:
@@ -38,6 +37,7 @@ private:
     void encodeVideoFile(QString* path);
     void printOutputMessage(QString msg);
     void transcodeNextFile();
+    QString getCompressionValueString();
 
     QList<QString>availableExtensions;
     QList<QString>filesToTranscode;
@@ -50,8 +50,7 @@ private:
     QString mOutputString;
     QString convertedFile;
 
-    QTextCursor cursor;
-    bool withSound;
+    QTextCursor cursor;    
 
 private slots:
     void readyReadStandardOutput();

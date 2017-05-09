@@ -8,11 +8,14 @@ Settings::Settings(QWidget *parent) :
     ui->setupUi(this);
     setWindowTitle("Settings");
 
+    readOptionsXml();
+
     compressionJackalImage= QPixmap(":/imgs/CompressionJackal.png");
 
-    compressionRate = ui->jackalSlider->value();
+    ui->jackalSlider->setValue(compressionRate);
 
     changeCompressionJackalImage(compressionRate);
+
 }
 
 Settings::~Settings()
@@ -23,6 +26,16 @@ Settings::~Settings()
 int Settings::getCompressionRate()
 {
     return compressionRate;
+}
+
+int Settings::getSoundOutput()
+{
+    return soundOutput;
+}
+
+void Settings::setSoundOutput(int value)
+{
+    soundOutput = value;
 }
 
 void Settings::changeCompressionJackalImage(int value)
@@ -38,11 +51,82 @@ void Settings::changeCompressionJackalImage(int value)
     QPixmap upscaledImg = downscaledImg.scaled(QSize(imgSize.width(),imgSize.height()),  Qt::KeepAspectRatio);
 
     ui->jackalImage->setPixmap(upscaledImg);
+}
 
+void Settings::readOptionsXml()
+{
+    QDomDocument document;
+    QFile file("options.xml");
+    if(!file.open(QIODevice::ReadOnly|QIODevice::Text))
+    {
+        qDebug() << "Failed to open file";
+    }
+    else
+    {
+        if(!document.setContent(&file))
+        {
+            qDebug() << "Failed to open document";
+        }
+        file.close();
+    }
+
+    QDomElement root = document.firstChildElement();
+    QDomElement compressionRateOptions = root.firstChildElement("CompressionRate");
+    QDomElement soundOutputOptions = root.firstChildElement("SoundOutput");
+
+    compressionRate = compressionRateOptions.attribute("value").toInt();
+    setSoundOutput(soundOutputOptions.attribute("value").toInt());
+}
+
+void Settings::writeOptionsXml()
+{
+    QDomDocument document;
+    QFile file("options.xml");
+    if(!file.open(QIODevice::ReadOnly|QIODevice::Text))
+    {
+        qDebug() << "Failed to open file";
+    }
+    else
+    {
+        if(!document.setContent(&file))
+        {
+            qDebug() << "Failed to open document";
+        }
+        file.close();
+    }
+
+    QDomElement root = document.firstChildElement();
+    QDomElement compressionRateOptions = root.firstChildElement("CompressionRate");
+    QDomElement soundOutputOptions = root.firstChildElement("SoundOutput");
+
+    compressionRateOptions.setAttribute("value", compressionRate);
+    soundOutputOptions.setAttribute("value", soundOutput);
+
+    if(!file.open( QIODevice::WriteOnly | QIODevice::Text ) )
+    {
+        qDebug( "Failed to open file for writing." );
+    }
+
+    QTextStream stream(&file);
+    stream << document.toString();
+
+    file.close();
 }
 
 void Settings::on_jackalSlider_valueChanged(int value)
 {
-    compressionRate = value;
-    changeCompressionJackalImage(compressionRate);
+    changeCompressionJackalImage(value);
+}
+
+void Settings::on_applySettingsButton_clicked()
+{
+    compressionRate = ui->jackalSlider->value();
+    writeOptionsXml();
+    close();
+}
+
+void Settings::on_cancelSettingsButton_clicked()
+{
+    ui->jackalSlider->setValue(compressionRate);
+    close();
 }

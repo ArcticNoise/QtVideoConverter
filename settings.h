@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPixmap>
+#include <QtXml>
 
 namespace Ui {
 class Settings;
@@ -17,16 +18,26 @@ public:
     ~Settings();
 
     int getCompressionRate();
+    int getSoundOutput();
+
+    void readOptionsXml();
+    void writeOptionsXml();
+
+    void setSoundOutput(int value);
 
 private:
     Ui::Settings *ui;    
     int compressionRate;
+    int soundOutput;
     QPixmap compressionJackalImage;
 
     void changeCompressionJackalImage(int value);
 
+
 private slots:
     void on_jackalSlider_valueChanged(int value);
+    void on_applySettingsButton_clicked();
+    void on_cancelSettingsButton_clicked();
 };
 
 #endif // SETTINGS_H

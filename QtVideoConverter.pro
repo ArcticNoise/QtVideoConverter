@@ -30,3 +30,6 @@ RESOURCES += \
     resources.qrc
 
 DISTFILES +=
+
+DESTDIR = $$PWD
+
